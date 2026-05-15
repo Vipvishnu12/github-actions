@@ -8,7 +8,449 @@
 
   <title>Fix It</title>
 
-  <link rel="stylesheet" href="style.css">
+  <!-- ICONS -->
+  <style>
+/* GOOGLE FONT */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins', sans-serif;
+}
+
+body{
+  background:
+    radial-gradient(circle at top left, rgba(56,189,248,0.18), transparent 32%),
+    radial-gradient(circle at right center, rgba(16,185,129,0.14), transparent 28%),
+    linear-gradient(135deg,#f8fbff 0%,#eef2ff 48%,#fdf2f8 100%);
+  min-height:100vh;
+}
+
+/* LOGIN PAGE */
+
+.login-page{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(135deg,#4f46e5,#7c3aed);
+}
+
+.login-box{
+  width:380px;
+  background:white;
+  padding:45px;
+  border-radius:30px;
+  text-align:center;
+  box-shadow:0 10px 40px rgba(0,0,0,0.15);
+}
+
+.login-box h1{
+  font-size:48px;
+  color:#4f46e5;
+  font-weight:700;
+}
+
+.login-box p{
+  color:#666;
+  margin:10px 0 35px;
+}
+
+.login-box input{
+  width:100%;
+  padding:16px;
+  margin-bottom:18px;
+  border:none;
+  background:#f3f4f6;
+  border-radius:14px;
+  font-size:16px;
+  outline:none;
+}
+
+.login-box input:focus{
+  border:2px solid #6366f1;
+}
+
+.login-box button{
+  width:100%;
+  padding:16px;
+  border:none;
+  border-radius:14px;
+  background:linear-gradient(135deg,#4f46e5,#7c3aed);
+  color:white;
+  font-size:17px;
+  font-weight:600;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.login-box button:hover{
+  transform:translateY(-2px);
+}
+
+/* WEBSITE */
+
+.hidden{
+  display:none;
+}
+
+/* HEADER */
+
+header{
+  background:linear-gradient(135deg,#0f172a 0%,#1d4ed8 55%,#06b6d4 100%);
+  backdrop-filter:blur(10px);
+  padding:16px 24px;
+  box-shadow:0 4px 20px rgba(0,0,0,0.05);
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+
+header h2{
+  font-size:26px;
+  color:#ffffff;
+  font-weight:700;
+}
+
+/* PAGE */
+
+.page{
+  display:none;
+  padding:35px;
+  padding-bottom:120px;
+}
+
+.active{
+  display:block;
+}
+
+/* REQUEST PAGE */
+
+.request-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+  gap:30px;
+}
+
+.request-card{
+  background:white;
+  padding:28px;
+  border-radius:28px;
+  box-shadow:0 10px 30px rgba(79,70,229,0.08);
+  transition:0.3s;
+}
+
+.request-card:hover{
+  transform:translateY(-5px);
+}
+
+.card-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.card-top h3{
+  font-size:32px;
+  color:#111827;
+}
+
+.priority{
+  background:#ede9fe;
+  color:#6d28d9;
+  padding:10px 18px;
+  border-radius:30px;
+  font-size:14px;
+  font-weight:600;
+}
+
+.problem{
+  margin-top:18px;
+  color:#666;
+  font-size:18px;
+}
+
+.card-details{
+  margin-top:24px;
+}
+
+.card-details p{
+  margin-bottom:15px;
+  color:#555;
+  font-size:17px;
+}
+
+.card-details i{
+  margin-right:10px;
+  color:#6366f1;
+}
+
+/* STATUS */
+
+.status-row{
+  margin-top:25px;
+  display:flex;
+  gap:12px;
+}
+
+.submitted{
+  background:#dcfce7;
+  color:#166534;
+  padding:10px 18px;
+  border-radius:30px;
+  font-size:14px;
+  font-weight:600;
+}
+
+.payment{
+  background:#fee2e2;
+  color:#b91c1c;
+  padding:10px 18px;
+  border-radius:30px;
+  font-size:14px;
+  font-weight:600;
+}
+
+/* CENTER ALIGN */
+
+#newRequestPage,
+#profilePage{
+  display:none;
+  justify-content:center;
+  align-items:center;
+  min-height:80vh;
+}
+
+#newRequestPage.active,
+#profilePage.active{
+  display:flex;
+}
+
+/* FORM */
+
+.form-box{
+  width:100%;
+  max-width:520px;
+  background:white;
+  padding:28px;
+  border-radius:26px;
+  box-shadow:0 10px 35px rgba(79,70,229,0.08);
+}
+
+.form-box h2{
+  margin-bottom:22px;
+  font-size:30px;
+  color:#111827;
+}
+
+.form-box input,
+.form-box select,
+.form-box textarea{
+  width:100%;
+  padding:13px 14px;
+  margin-bottom:14px;
+  border:none;
+  background:#f3f4f6;
+  border-radius:12px;
+  font-size:15px;
+  outline:none;
+}
+
+.form-box input:focus,
+.form-box select:focus,
+.form-box textarea:focus{
+  border:2px solid #6366f1;
+}
+
+.form-box textarea{
+  height:110px;
+  resize:none;
+}
+
+.form-box button{
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:12px;
+  background:linear-gradient(135deg,#0f172a 0%,#1d4ed8 55%,#06b6d4 100%);
+  color:white;
+  font-size:15px;
+  font-weight:600;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.form-box button:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 20px rgba(29,78,216,0.25);
+}
+
+/* PROFILE */
+
+.profile-box{
+  width:100%;
+  max-width:430px;
+  background:white;
+  padding:20px;
+  border-radius:22px;
+  box-shadow:0 10px 35px rgba(79,70,229,0.08);
+}
+
+.profile-top{
+  text-align:center;
+  margin-bottom:20px;
+}
+
+.profile-icon{
+  width:72px;
+  height:72px;
+  background:linear-gradient(135deg,#4f46e5,#7c3aed);
+  color:white;
+  margin:auto;
+  border-radius:50%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:26px;
+  box-shadow:0 8px 20px rgba(79,70,229,0.3);
+}
+
+.profile-top h3{
+  margin-top:12px;
+  font-size:22px;
+  color:#111827;
+}
+
+.profile-item{
+  display:flex;
+  gap:18px;
+  margin-bottom:14px;
+  padding:14px;
+  background:#f9fafb;
+  border-radius:14px;
+}
+
+.profile-item i{
+  font-size:18px;
+  color:#6366f1;
+  margin-top:5px;
+}
+
+.profile-item span{
+  color:#666;
+  font-size:13px;
+}
+
+.profile-item p{
+  margin-top:5px;
+  font-size:16px;
+  color:#111827;
+}
+
+.logout-btn{
+  width:100%;
+  padding:13px;
+  border:none;
+  border-radius:12px;
+  background:linear-gradient(135deg,#ef4444,#dc2626);
+  color:white;
+  font-size:15px;
+  font-weight:600;
+  cursor:pointer;
+  margin-top:10px;
+}
+
+/* BOTTOM NAV */
+
+.bottom-nav{
+  position:fixed;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:min(100%,720px);
+  background:rgba(255,255,255,0.76);
+  backdrop-filter:blur(10px);
+  display:flex;
+  justify-content:space-around;
+  padding:10px;
+  border-top:1px solid #e5e7eb;
+  border-radius:22px 22px 0 0;
+  box-shadow:0 -8px 30px rgba(15,23,42,0.08);
+}
+
+.nav-item{
+  text-align:center;
+  color:#fff;
+  cursor:pointer;
+  transition:0.3s;
+  flex:1;
+  margin:0 4px;
+  padding:8px 0 7px;
+  border-radius:14px;
+  box-shadow:0 8px 18px rgba(15,23,42,0.08);
+}
+
+.nav-item i{
+  font-size:18px;
+}
+
+.nav-item span{
+  display:block;
+  margin-top:3px;
+  font-size:11px;
+  font-weight:500;
+}
+
+.bottom-nav .nav-item:nth-child(1){
+  background:linear-gradient(135deg,#2563eb,#3b82f6);
+}
+
+.bottom-nav .nav-item:nth-child(2){
+  background:linear-gradient(135deg,#10b981,#34d399);
+}
+
+.bottom-nav .nav-item:nth-child(3){
+  background:linear-gradient(135deg,#f97316,#fb7185);
+}
+
+.active-nav{
+  outline:2px solid rgba(255,255,255,0.5);
+  transform:translateY(-2px);
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+  .page{
+    padding:20px;
+    padding-bottom:120px;
+  }
+
+  header h2{
+    font-size:24px;
+  }
+
+  .login-box{
+    width:90%;
+  }
+
+  .form-box,
+  .profile-box{
+    padding:18px;
+  }
+
+  .bottom-nav{
+    width:calc(100% - 16px);
+    border-radius:18px 18px 0 0;
+    padding:8px;
+  }
+
+}
+  </style>
 
   <!-- ICONS -->
   <link rel="stylesheet"
@@ -246,7 +688,254 @@
 
   </div>
 
-  <script src="script.js"></script>
+  <script>
+// script.js
+
+const REQUEST_STORAGE_KEY = "serviceRequests";
+
+function getSavedRequests(){
+  try{
+    return JSON.parse(localStorage.getItem(REQUEST_STORAGE_KEY)) || [];
+  }catch(error){
+    return [];
+  }
+}
+
+function saveRequests(requests){
+  localStorage.setItem(REQUEST_STORAGE_KEY, JSON.stringify(requests));
+}
+
+function getPriorityRank(priority){
+  if(priority === "High"){
+    return 3;
+  }
+
+  if(priority === "Medium"){
+    return 2;
+  }
+
+  if(priority === "Low" || priority === "Easy"){
+    return 1;
+  }
+
+  return 0;
+}
+
+function renderRequests(){
+  let requestGrid =
+  document.querySelector("#requestPage .request-grid");
+
+  if(!requestGrid){
+    return;
+  }
+
+  let savedRequests = getSavedRequests();
+
+  savedRequests.sort((left, right)=>{
+    let priorityDifference = getPriorityRank(right.priority) - getPriorityRank(left.priority);
+
+    if(priorityDifference !== 0){
+      return priorityDifference;
+    }
+
+    return new Date(right.date).getTime() - new Date(left.date).getTime();
+  });
+
+  let savedCards = savedRequests.map(request=>{
+    return `
+      <div class="request-card">
+        <div class="card-top">
+          <h3>${request.deviceName}</h3>
+          <span class="priority">${request.priority}</span>
+        </div>
+        <p class="problem">${request.problem}</p>
+        <div class="card-details">
+          <p><i class="fa-solid fa-location-dot"></i>${request.serviceType}</p>
+          <p><i class="fa-regular fa-calendar"></i>${request.date}</p>
+          <p><i class="fa-solid fa-screwdriver-wrench"></i>${request.address}</p>
+        </div>
+        <div class="status-row">
+          <span class="submitted">Submitted</span>
+          <span class="payment">Not Paid</span>
+        </div>
+      </div>
+    `;
+  }).join("");
+
+  requestGrid.innerHTML = `
+    <div class="request-card">
+      <div class="card-top">
+        <h3>Mobile</h3>
+        <span class="priority">High</span>
+      </div>
+      <p class="problem">Lap display issue</p>
+      <div class="card-details">
+        <p><i class="fa-solid fa-location-dot"></i>Home Service</p>
+        <p><i class="fa-regular fa-calendar"></i>21/04/2026</p>
+        <p><i class="fa-solid fa-screwdriver-wrench"></i>Scheduled: 24/04/2026</p>
+      </div>
+      <div class="status-row">
+        <span class="submitted">Submitted</span>
+        <span class="payment">Not Paid</span>
+      </div>
+    </div>
+    ${savedCards}
+  `;
+}
+
+function submitRequest(){
+  let deviceName = document.getElementById("deviceName").value.trim();
+  let serviceType = document.getElementById("serviceType").value;
+  let priorityType = document.getElementById("priorityType").value;
+  let addressInput = document.getElementById("addressInput").value.trim();
+  let problemInput = document.getElementById("problemInput").value.trim();
+
+  if(
+    deviceName === "" ||
+    serviceType === "Select Service" ||
+    priorityType === "Priority" ||
+    addressInput === "" ||
+    problemInput === ""
+  ){
+    alert("Please fill all fields");
+    return;
+  }
+
+  let savedRequests = getSavedRequests();
+
+  savedRequests.unshift({
+    deviceName: deviceName,
+    serviceType: serviceType,
+    priority: priorityType,
+    address: addressInput,
+    problem: problemInput,
+    date: new Date().toLocaleDateString()
+  });
+
+  saveRequests(savedRequests);
+  renderRequests();
+
+  document.getElementById("deviceName").value = "";
+  document.getElementById("serviceType").value = "Select Service";
+  document.getElementById("priorityType").value = "Priority";
+  document.getElementById("addressInput").value = "";
+  document.getElementById("problemInput").value = "";
+
+  showPage("requestPage", "My Requests", document.querySelector(".nav-item.active-nav") || document.querySelector(".nav-item"));
+}
+
+function initApp(){
+  let username = localStorage.getItem("username");
+  let mobile = localStorage.getItem("mobile");
+
+  if(username && mobile){
+    document.getElementById("loginPage").classList.add("hidden");
+    document.getElementById("website").classList.remove("hidden");
+    loadProfile();
+    renderRequests();
+  }else{
+    renderRequests();
+  }
+}
+
+initApp();
+
+function login(){
+
+  let username =
+  document.getElementById("username").value;
+
+  let mobile =
+  document.getElementById("mobile").value;
+
+  if(username === "" || mobile === ""){
+
+    alert("Please fill all fields");
+
+    return;
+  }
+
+  // store data
+
+  localStorage.setItem("username", username);
+  localStorage.setItem("mobile", mobile);
+
+  // hide login
+
+  document.getElementById("loginPage")
+  .classList.add("hidden");
+
+  // show website
+
+  document.getElementById("website")
+  .classList.remove("hidden");
+
+  // load profile
+
+  loadProfile();
+  renderRequests();
+}
+
+// PAGE CHANGE
+
+function showPage(pageId, title, element){
+
+  let pages =
+  document.querySelectorAll(".page");
+
+  pages.forEach(page=>{
+    page.classList.remove("active");
+  });
+
+  document.getElementById(pageId)
+  .classList.add("active");
+
+  // title
+
+  document.getElementById("pageTitle")
+  .innerText = title;
+
+  // active nav
+
+  let navItems =
+  document.querySelectorAll(".nav-item");
+
+  navItems.forEach(item=>{
+    item.classList.remove("active-nav");
+  });
+
+  element.classList.add("active-nav");
+}
+
+// LOAD PROFILE
+
+function loadProfile(){
+
+  let username =
+  localStorage.getItem("username");
+
+  let mobile =
+  localStorage.getItem("mobile");
+
+  document.getElementById("profileName")
+  .innerText = username;
+
+  document.getElementById("userNameText")
+  .innerText = username;
+
+  document.getElementById("mobileText")
+  .innerText = mobile;
+}
+
+// LOGOUT
+
+function logout(){
+
+  localStorage.clear();
+
+  location.reload();
+}
+  </script>
 
 </body>
 </html>
